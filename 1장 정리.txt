@@ -1,0 +1,189 @@
+AWT
+ java.awt 패키지에 포함
+ 자바가 처음 등장했을 때 함께 배포된 GUI 라이브러리
+ 중량 컴포넌트 (heavy weight component)
+• 운영체제(native OS)의 도움을 받아 컴포넌트를 화면에 출력
+• 운영체제에 따라 컴포넌트가 다른 모양으로 그려짐
+• 운영체제 자원을 많이 소모하여 운영체제에 많은 부담
+
+
+
+Swing
+ javax.swing 패키지에 포함
+ 순수 자바 언어로 작성된 자바 GUI 라이브러리
+• 운영체제에 관계없이 항상 동일하게 동작하고 동일한 모습으로 그려짐
+• AWT 컴포넌트의 기능을 100% 지원하며 추가적인 고급 컴포넌트를 지원
+• AWT 컴포넌트와 구분하기 위해 클래스 앞에 대문자 J를 사용
+• AWT에 구현된 이벤트 처리나 원리를 바탕으로 구현되었으나 혼용할 수 없음
+ 경량 컴포넌트 (light weight component)
+• 운영체제에 독립적
+
+
+
+Swing 기반 응용 프로그램
+예
+응용 프로그램 전체를 담는 JFrame  
+모든 메뉴를 담는 JMenuBar  
+메뉴로 작동하는 Jmenu  
+툴바로 작동하는 JToolBar  
+버튼으로 작동하는 JButton  
+문자열을 출력하는 JLabel  
+풀다운으로 동작하는 JComboBox  
+리스트를 출력하는 JList
+
+
+
+자바 GUI 패키지 계층 구조  (pdf 7p)
+모든 GUI 컴포넌트는 Component 클래스를 상속받음
+AWT 컴포넌트 
+• Component 직접 상속 계열 
+• Container 상속 계열 
+
+ Swing 컴포넌트 
+• JComponent 상속 계열 
+• JComponent 비상속 계열 
+• JApplet 
+• JFrame 
+• JDialog 
+• JWindow
+
+
+
+
+◎ 타이틀 달기
+ JFrame의 생성자를 호출하는 방법
+
+ super("타이틀 문자열");
+
+ JFrame 클래스의 메소드를 호출하는 방법
+
+ setTitle("타이틀 문자열");
+
+
+
+
+컨텐트 팬에 컴포넌트 달기
+
+
+프레임의 컨텐트 팬 알아내기
+Container contentPane = frame.getContentPane();
+
+컨텐트 팬에 버튼 컴포넌트 붙이기
+JButton btn = new Jbutton("Click");
+contentPane.add(btn);
+
+프레임의 컨텐트 팬 변경하기
+
+JPanel panel = new JPanel();
+frame.setContentPane(panel);
+
+
+
+
+컨테이너와 배치 관리자
+ 컨테이너에 부착되는 컴포넌트의 위치와 크기는 컨테이너 내부에 있는 배치 관리자에 의해 결정
+ 배치 관리자 (layout manager)
+
+• 컨테이너에 컴포넌트가 부착되는 시점에 컴포넌트의 위치와 크기를 결정
+• 컨테이너의 크기가 변경되면 배치 관리자는 컨테이너 내부의 모든 컴포넌트의 위치와 크기를 조정
+• 컨테이너마다 한 개의 배치관리자를 사용할 수 있으나 필요에 따라 사용하지 않음
+• java.awt 패키지에 존재
+
+
+
+
+
+
+배치 관리자의 종류
+ FlowLayout
+• 컨테이너에 컴포넌트를 삽입(add)하는 순으로 프로그램에서 정한 정렬 방법에 따라 컴포넌트의 크기를 적당히 설정하여 배치
+• 같은 행에 더 이상 배치할 공간이 없으면 아래로 내려와 다시 정렬 방법에 따라 배치
+ BorderLayout
+• 컨테이너 공간을 동/서/남/북/중앙(기본값)의 5개 영역으로 분할하여, 프로그램에서 지정한 영역에 컴포넌트 크기를 적당히
+설정하여 배치
+ GridLayout
+• 프로그램에서 설정한 크기의 2차원 격자로 컨테이너 공간을 분할하여, 컨테이너에 컴포넌트가 삽입되는 순으로 열 우선으로
+컴포넌트의 크기를 셀 크기로 설정하여 배치
+ CardLayout
+• 컨테이너 공간에 카드를 쌓듯이 컨테이너 크기와 동일하게 컴포넌트를 포개어 배치
+
+
+
+
+FlowLayout 배치 방법
+ 컴포넌트를 삽입(add)하는 순으로 프로그램에서 정한 정렬 방법에 따라 컴포넌트의 크기를 적당히 설정하여 배치
+ 같은 행에 더 이상 배치할 공간이 없으면 아래로 내려와 다시 정렬 방법에 따라 배치
+◎ FlowLayout 생성자
+ FlowLayout()
+ FlowLayout(int align=FlowLayout.CENTER)
+ FlowLayout(int align=FlowLayout.CENTER, int hGap=5, int vGap=5)
+• align : 컴포넌트 정렬 방법
+• FlowLayout.LEFT, FlowLayout.RIGHT, FlowLayout.CENTER
+• hGap : 컴포넌트 사이의 수평 간격 (픽셀 단위)
+• vGap : 컴포넌트 사이의 수직 간격 (픽셀 단위)
+
+
+
+new FlowLayout();
+new FlowLayout(FlowLayout.LEFT);
+new FlowLayout(FlowLayout.LEFT, 30, 40);
+
+
+
+FlowLayout을 가진 컨테이너에 컴포넌트 추가하기
+ void add(Component comp)
+• comp : 컨테이너에 삽입되는 컴포넌트
+
+
+c.setLayout(new FlowLayout());
+c.add(new JButton("add"));
+c.add(new JButton("sub"));
+c.add(new JButton("mul"));
+c.add(new JButton("div"));
+c.add(new JButton("Calculate"));
+
+
+
+
+◎ BorderLayout 배치 방법
+ 컨테이너 공간을 동/서/남/북/중앙(기본값)의 5개 영역으로 분할하여, 프로그램에서 지정한 영역에 컴포넌트 크기를 적
+당히 설정하여 배치
+◎ BorderLayout 생성자
+ BorderLayout()
+ BorderLayout(int hGap=0, int vGap=0)
+• hGap : 컴포넌트 사이의 수평 간격 (픽셀 단위)
+• vGap : 컴포넌트 사이의 수직 간격 (픽셀 단위)
+
+
+
+
+BorderLayout 을 가진 컨테이너에 컴포넌트 추가하기
+ void add(Component comp, int index)
+• comp : 컨테이너에 삽입되는 컴포넌트
+• index : 컴포넌트의 위치
+• BorderLayout.EAST
+• BorderLayout.WEST
+• BorderLayout.SOUTH
+• BorderLayout.NORTH
+• BorderLayout.CENTER
+
+
+c.setLayout(new BorderLayout());
+c.add(new JButton("div"), BorderLayout.WEST);
+c.add(new JButton("Calculate"), BorderLayout.CENTER);
+
+BorderLayout에는 원칙적으로 5개의 컴포넌트만 추가할 수 있기 때문에 5개를 넘는 경우 JPanel 등 다른
+컨테이너를 먼저 부착한 후 JPanel에 컴포넌트를 추가하는 형식으로 구현
+
+
+
+ GridLayout 배치 방법
+ 컨테이너 공간을 격자(grid) 모양으로 분할하여 각 셀에 하나씩 컴포넌트를 배치
+◎ GridLayout 생성자
+ GridLayout()
+ GridLayout(int rows=1, int cols=1)
+ GridLayout(int rows=1, int cols=1, int hGap=0, int vGap=0)
+• rows : 그리드를 구성하는 행의 개수
+• cols : 그리드를 구성하는 열의 개수
+• hGap : 컴포넌트 사이의 수평 간격 (픽셀 단위)
+• vGap : 컴포넌트 사이의 수직 간격 (픽셀 단위)
