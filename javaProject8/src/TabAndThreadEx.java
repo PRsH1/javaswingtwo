@@ -9,8 +9,7 @@ class MyLabel extends JLabel {
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		g.setColor(Color.MAGENTA);
-		int width = (int) ((double) this.getWidth() / 
-				maxBarSize * barSize);
+		int width = (int) ((double) this.getWidth() / maxBarSize * barSize);
 		if (width == 0)
 			return;
 		g.fillRect(0, 0, width, this.getHeight());
